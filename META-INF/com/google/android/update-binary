@@ -61,6 +61,9 @@ api_level_arch_detect
 
 # You can get the Android API version from $API, the CPU architecture from $ARCH
 # Useful if you are creating Android version / platform dependent mods
+if [ $API -lt 24 ]; then
+  abort "Only support Nougat+"
+fi
 
 # Setup busybox and binaries
 $BOOTMODE && boot_actions || recovery_actions
@@ -70,7 +73,7 @@ $BOOTMODE && boot_actions || recovery_actions
 ##########################################################################################
 
 # Extract common files
-unzip -o "$ZIP" module.prop config.sh 'common/*' -d $INSTALLER >&2
+unzip -o "$ZIP" module.prop config.sh Navigation.dex 'common/*' -d $INSTALLER >&2
 
 [ ! -f $INSTALLER/config.sh ] && abort "! Unable to extract zip file!"
 # Load configurations
@@ -135,6 +138,8 @@ $POSTFSDATA && cp -af $INSTALLER/common/post-fs-data.sh $MODPATH/post-fs-data.sh
 
 # service mode scripts
 $LATESTARTSERVICE && cp -af $INSTALLER/common/service.sh $MODPATH/service.sh
+
+detect_origin
 
 ui_print "- Setting permissions"
 set_permissions

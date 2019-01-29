@@ -1,7 +1,14 @@
-# Magisk Module Template
+# Navigation Bar Show/Hide
 
-**Update `README.md` if you want to submit your module to the online repo!** This `README.md` will be shown in a Webview dialog when a user taps your module in Magisk Manager, so make sure to place some information / changelog / notes here.
+Android has a boolean for showing navigation bar or not. In ``frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java`` from AOSP, ``mHasNavigationBar`` got config from `com.android.internal.R.bool.config_showNavigationBar` and can be overwrited by property `qemu.hw.mainkeys`.
 
-If you are not familiar with the Markdown syntax, you can start by experimenting on GitHub's online Markdown editor, which will let you preview before publishing. If you need more help, the [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) will be handy.
+In the past, all tours tells people using ``qemu.hw.mainkeys`` to show/hide navbar, but I found that some apps/games will not hide the bar while in fullscreen mode. So I think using this way is better. 
 
-For more information about modules and repos, please check the [official documentation](https://topjohnwu.github.io/Magisk/)
+This overlay will overwrite ``config_showNavigationBar`` from framework.
+
+## Instructions
+- Installer will detect if your device has navbar or not. If you has that then it will install the hidden one.
+- The detect script can be found [here](https://gist.github.com/null4n/dd52b2890b60ddbb315de158cc72ef5e).
+- I only test in 8.0/8.1, but RRO should work after 7.0.
+- If it didn't effect, that means your rom didn't support it or it add a whitelist for overlay apps.
+- If you want to disable hardware key (HOME, BACK, APP_SWITCH), copy your keylayout config from ``/vendor/usr/keylayout`` to ``$MODDIR/system/vendor/usr/keylayout`` and delete the line has `HOME`, `BACK`, `APP_SWITCH`.

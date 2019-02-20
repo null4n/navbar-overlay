@@ -12,3 +12,6 @@ This overlay will overwrite ``config_showNavigationBar`` from framework.
 - I only test in 8.0/8.1, but RRO should work after 7.0.
 - If it didn't effect, that means your rom didn't support it or it add a whitelist for overlay apps.
 - If you want to disable hardware key (HOME, BACK, APP_SWITCH), copy your keylayout config from ``/vendor/usr/keylayout`` to ``$MODDIR/system/vendor/usr/keylayout`` and delete the line has `HOME`, `BACK`, `APP_SWITCH`.
+
+## Changelog
+- Remove ``qemu.hw.mainkeys`` if OEM used it.

@@ -16,3 +16,4 @@ This overlay will overwrite ``config_showNavigationBar`` from framework.
 ## Changelog
 - R1: Remove ``qemu.hw.mainkeys`` if OEM used it.
 - R2: fix detect script.
+- R3: fix cert issue.

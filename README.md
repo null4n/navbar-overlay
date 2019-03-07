@@ -14,4 +14,5 @@ This overlay will overwrite ``config_showNavigationBar`` from framework.
 - If you want to disable hardware key (HOME, BACK, APP_SWITCH), copy your keylayout config from ``/vendor/usr/keylayout`` to ``$MODDIR/system/vendor/usr/keylayout`` and delete the line has `HOME`, `BACK`, `APP_SWITCH`.
 
 ## Changelog
-- Remove ``qemu.hw.mainkeys`` if OEM used it.
+- R1: Remove ``qemu.hw.mainkeys`` if OEM used it.
+- R2: fix detect script.

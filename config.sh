@@ -106,11 +106,13 @@ detect_origin() {
   else
     update=false
   fi
-  if ($orig && $update) || (! $orig && ! $update); then
-    rm -f /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar_hide.apk
-    mv /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar_show.apk /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar.apk
+  if ((! $orig) && $update) || ($orig && (! $update)); then
+    ui_print "- Origin status: shown"
+    rm -f $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar_show.apk
+    mv $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar_hide.apk $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar.apk
   else
-    rm -f /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar_show.apk
-    mv /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar_hide.apk /sbin/.core/img/$MODID/system/vendor/overlay/NavigationBar/NavigationBar.apk
+    ui_print "- Origin status: hidden"
+    rm -f $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar_hide.apk
+    mv $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar_show.apk $MODPATH/system/vendor/overlay/NavigationBar/NavigationBar.apk
   fi
 }

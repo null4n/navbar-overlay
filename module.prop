@@ -1,7 +1,6 @@
 id=navbar-overlay
 name=Show/Hide Navigation Bar
 version=v1.0
-versionCode=4
+versionCode=5
 author=null4n @ github.com
 description=Show/Hide your navigation bar. Detect if your device has stock navbar or not.
-minMagisk=17000

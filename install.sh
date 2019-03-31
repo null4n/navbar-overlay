@@ -132,8 +132,15 @@ print_modname() {
 on_install() {
   # The following is the default implementation: extract $ZIPFILE/system to $MODPATH
   # Extend/change the logic to whatever you want
+  if [ $API -lt 24 ]; then
+    abort "Only support Nougat+"
+  fi
+
   ui_print "- Extracting module files"
   unzip -o "$ZIPFILE" 'system/*' -d $MODPATH >&2
+
+  unzip -oj "$ZIPFILE" Navigation.dex -d $TMPDIR >&2
+  detect_origin
 }
 
 # Only some special files require specific permissions

@@ -51,10 +51,6 @@ mount_partitions
 # Detect version and architecture
 api_level_arch_detect
 
-if [ $API -lt 24 ]; then
-  abort "Only support Nougat+"
-fi
-
 # Setup busybox and binaries
 $BOOTMODE && boot_actions || recovery_actions
 
@@ -63,7 +59,7 @@ $BOOTMODE && boot_actions || recovery_actions
 ##########################################################################################
 
 # Extract common files
-unzip -oj "$ZIPFILE" module.prop install.sh uninstall.sh 'common/*' Navigation.dex -d $TMPDIR >&2
+unzip -oj "$ZIPFILE" module.prop install.sh uninstall.sh 'common/*' -d $TMPDIR >&2
 
 [ ! -f $TMPDIR/install.sh ] && abort "! Unable to extract zip file!"
 # Load install script
@@ -138,8 +134,6 @@ on_install
 for TARGET in $REPLACE; do
   mktouch $MODPATH$TARGET/.replace
 done
-
-detect_origin
 
 ui_print "- Setting permissions"
 set_permissions
